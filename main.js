@@ -26,8 +26,8 @@ window.onload = () => {
   document.addEventListener('keydown', keyDown);
   document.addEventListener('keyup', keyUp);
 
-  controls.addEventListener('mousedown', mouseDown);
-  controls.addEventListener('mouseup', mouseUp);
+  controls.addEventListener('touchstart', mouseDown);
+  controls.addEventListener('touchend', mouseUp);
 
   //fill the platform array
   createPlatforms();

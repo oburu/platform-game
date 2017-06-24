@@ -14,32 +14,44 @@ canvas{
 }
 .label{
   margin:20px auto;
-  width:360px;
+  width:260px;
 }
-.button{
-  width:50px;
-  height:50px;
-  background-size: contain;
-  float: left;
-  padding: 20px;
-  margin: 20px;
-  position: relative;
+.controls{
+  display:none;
 }
-.controls:after{
-  clear: both;
-}
-.button-left{
-  background-image: url(images/left-arrow.svg);
-}
-.button-right{
-  background-image: url(images/right-arrow.svg);
-}
-.button-jump{
-  background-image: url(images/up-arrow.svg);
-  float: right;
-}
+
 @media only screen and (max-width: 900px) {
 	.container{
 		width:100%;
 	}
+}
+@media only screen and (max-width: 600px) {
+  .button{
+    width:80px;
+    height:80px;
+    background-size: contain;
+    float: left;
+    position: relative;
+  }
+  .button-left{
+    background-image: url(images/left-arrow.svg);
+    margin:15px 0 15px 15px;
+  }
+  .button-right{
+    background-image: url(images/right-arrow.svg);
+    margin:15px;
+  }
+  .button-jump{
+    background-image: url(images/up-arrow.svg);
+    right: 0;
+    position: absolute;
+    margin:15px;
+  }
+  .label{
+    margin-left: 10px;
+  }
+  .controls{
+    display:inline-block;
+    margin-top: 50px;
+  }
 }
