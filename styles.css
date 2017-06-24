@@ -2,6 +2,8 @@ html, body{
   height: 100%;
   width: 100%;
   margin:0;
+  font-family: monospace;
+  color:#787878;
 }
 .container{
   width: 900px;
@@ -9,6 +11,32 @@ html, body{
 }
 canvas{
   width:100%;
+}
+.label{
+  margin:20px auto;
+  width:360px;
+}
+.button{
+  width:50px;
+  height:50px;
+  background-size: contain;
+  float: left;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+}
+.controls:after{
+  clear: both;
+}
+.button-left{
+  background-image: url(images/left-arrow.svg);
+}
+.button-right{
+  background-image: url(images/right-arrow.svg);
+}
+.button-jump{
+  background-image: url(images/up-arrow.svg);
+  float: right;
 }
 @media only screen and (max-width: 900px) {
 	.container{
