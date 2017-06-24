@@ -1,7 +1,8 @@
 //global variables
+const INITIAL_POSITION = 200;
 let player = {
-  x:200,
-  y:200,
+  x:INITIAL_POSITION,
+  y:INITIAL_POSITION,
   width:10,
   height:20
 }
@@ -51,6 +52,15 @@ const update = () => {
     velocity.y += gravity;
   }
 
+  if(player.x >= canv.width){
+    player.x = 0;
+  }
+
+  if(player.y >= canv.height){
+    player.y = INITIAL_POSITION;
+    player.x = INITIAL_POSITION;
+  }
+
   //assume we are not on the ground for the next frame
   onGround=false;
   platform.forEach((item) => {
@@ -68,6 +78,10 @@ const update = () => {
   ctx.fillRect(player.x - player.width/2, player.y - player.height, player.width, player.height);
 
   //draw platforms
+  drawPlatforms();
+}
+
+const drawPlatforms = () => {
   platform.forEach((item) => {
     ctx.fillStyle="green";
     ctx.fillRect(item.x,item.y,item.w,item.h);
