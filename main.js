@@ -25,6 +25,12 @@ window.onload = () => {
   document.addEventListener("keyup", keyUp);
 
   //fill the platform array
+  createPlatforms();
+}
+
+const createPlatforms = () =>{
+  //clear the platforms yo!
+  platform = [];
   for(i=0;i<50;i++) {
     platform.push({
       x:Math.random()*canv.width,
@@ -54,6 +60,7 @@ const update = () => {
 
   if(player.x >= canv.width){
     player.x = 0;
+    createPlatforms();
   }
 
   if(player.y >= canv.height){
