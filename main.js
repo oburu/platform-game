@@ -1,13 +1,22 @@
 //global variables
-let playeX=200, playerY=200;
-let xVelocity=0, yVelocity=0;
-let gravity=0.5;
-let onGround=false;
-let holdLeft=false, holdRight=false, platform=[], canv, ctx;
+let player = {
+  x:200,
+  y:200,
+  width:10,
+  height:20
+}
+let velocity = {
+  x:0,
+  y:0
+}
+let gravity = 0.5;
+let onGround = false;
+let holdLeft = false, holdRight = false;
+let platform = [], canv, ctx;
 
-window.onload=() => {
-  canv=document.getElementById("gc");
-  ctx=canv.getContext("2d");
+window.onload = () => {
+  canv = document.getElementById("game");
+  ctx = canv.getContext("2d");
 
   setInterval(update,1000/30);
 
@@ -27,39 +36,39 @@ window.onload=() => {
 
 const update = () => {
   if(holdLeft) {
-    xVelocity=-2;
+    velocity.x =- 2;
   }
-
   if(holdRight) {
-    xVelocity=2;
+    velocity.x = 2;
   }
 
-  playeX+=xVelocity;
-  playerY+=yVelocity;
+  player.x += velocity.x;
+  player.y += velocity.y;
 
   if(onGround) {
-    xVelocity *= 0.8;
+    velocity.x *= 0.8;
   } else {
-    yVelocity += gravity;
+    velocity.y += gravity;
   }
 
   //assume we are not on the ground for the next frame
   onGround=false;
-  platform.forEach((item)=>{
-    if(playeX>item.x && playeX<item.x+item.w &&
-      playerY>item.y && playerY<item.y+item.h) {
-      playerY=item.y;
-      onGround=true;
+  platform.forEach((item) => {
+    if(player.x > item.x && player.x < item.x+item.w && player.y > item.y && player.y < item.y+item.h) {
+      player.y = item.y;
+      onGround = true;
     }
   });
-
+  //draw background
   ctx.fillStyle="black";
   ctx.fillRect(0,0,canv.width,canv.height);
 
+  //draw player
   ctx.fillStyle="white";
-  ctx.fillRect(playeX-5,playerY-20,10,20);
+  ctx.fillRect(player.x - player.width/2, player.y - player.height, player.width, player.height);
 
-  platform.forEach((item)=>{
+  //draw platforms
+  platform.forEach((item) => {
     ctx.fillStyle="green";
     ctx.fillRect(item.x,item.y,item.w,item.h);
   });
@@ -68,15 +77,15 @@ const update = () => {
 const keyDown = (e)=> {
   switch(e.keyCode) {
     case 37:
-      holdLeft=true;
+      holdLeft = true;
       break;
     case 38:
       if(onGround) {
-        yVelocity=-10;
+        velocity.y =- 10;
       }
       break;
     case 39:
-      holdRight=true;
+      holdRight = true;
       break;
   }
 }
@@ -84,15 +93,15 @@ const keyDown = (e)=> {
 const keyUp = (e)=> {
   switch(e.keyCode) {
     case 37:
-      holdLeft=false;
+      holdLeft = false;
       break;
     case 38:
-      if(yVelocity<-3) {
-        yVelocity=-3;
+      if(velocity.y < -3) {
+        velocity.y =- 3;
       }
       break;
     case 39:
-      holdRight=false;
+      holdRight = false;
       break;
   }
 }
